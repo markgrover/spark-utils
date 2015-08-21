@@ -39,8 +39,8 @@ fi
 for host in $HOSTS; do
   if [ $host != $HOSTNAME ]; then
     scp $TARBALL_NAME root@$host:~
-    scp $TEMP_SCRIPT root@$host:~
-    ssh root@$host '$TEMP_SCRIPT'
+    scp $TEMP_SCRIPT root@$host:$TEMP_SCRIPT
+    ssh root@$host "$TEMP_SCRIPT"
   else
     $TEMP_SCRIPT
   fi
