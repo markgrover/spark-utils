@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash -xe
 DEFAULT_TARBALL_NAME=spark-1.5.0-SNAPSHOT-bin-nm.tgz
 # * Must scp the tarball to one of the nodes of the cluster (can be any node)
 # * Must also scp this script to the same node.
@@ -19,10 +19,11 @@ fi
 
 TEMP_SCRIPT=$(mktemp)
 cat > $TEMP_SCRIPT << EOF
-rm -rf ~/spark-*/
 cd ~
-tar -xzvf $TARBALL_NAME
-SPARK_DIR=\$(ls -d spark-*/)
+SPARK_DIR=spark
+rm -rf \$SPARK_DIR || :
+mkdir \$SPARK_DIR 
+tar -C spark --strip-components=1 -xzvf $TARBALL_NAME
 cd \$SPARK_DIR
 rm -rf conf
 ln -s /etc/spark/conf conf
