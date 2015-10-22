@@ -1,6 +1,6 @@
 #!/bin/bash -xe
-DEFAULT_HOSTNAMES=($(echo mgrover-haa3-{1..4}.vpc.cloudera.com))
 
+. cluster_properties.sh
 TEMP_SCRIPT=$(mktemp)
 cat > $TEMP_SCRIPT << EOF
 cd /etc/spark/conf
